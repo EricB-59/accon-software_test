@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# Directorio de Usuarios - Prueba Técnica
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta aplicación es una solución al reto técnico para el puesto de Desarrollador Front-End. Consiste en una aplicación web que consume una API externa para mostrar un directorio de usuarios, permitiendo búsqueda en tiempo real y visualización de detalles mediante un modal.
 
-Currently, two official plugins are available:
+## 🚀 Cómo arrancar el proyecto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este proyecto utiliza **pnpm** como gestor de paquetes para mayor rapidez y eficiencia.
 
-## React Compiler
+1.  **Instalar dependencias:**
+    Asegúrate de estar en la carpeta raíz del proyecto y ejecuta:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+    ```bash
+    pnpm install
+    ```
 
-## Expanding the ESLint configuration
+2.  **Iniciar servidor de desarrollo:**
+    Para levantar el entorno local:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+    ```bash
+    pnpm dev
+    ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+    La aplicación estará disponible en la URL que indique la terminal (usualmente `http://localhost:5173`).
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+3.  **Linting (Opcional):**
+    Para verificar la calidad del código y reglas de TypeScript:
+    ```bash
+    pnpm lint
+    ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠 Stack Tecnológico
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+He seleccionado estas herramientas basándome en los requisitos de la oferta (React 18+, TypeScript) y buscando un equilibrio entre rendimiento y mantenibilidad:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React + Vite:** Para un entorno de desarrollo ágil y optimizado.
+- **TypeScript:** Uso estricto de tipos e interfaces para garantizar la seguridad de datos y autocompletado.
+- **TanStack Query (React Query):** Para la gestión eficiente del estado del servidor (fetching, caching, loading/error states).
+- **Tailwind CSS:** Para un diseño de interfaz rápido, responsive y mantenible.
+- **pnpm:** Como gestor de paquetes eficiente.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ✨ Funcionalidades Implementadas
+
+### Requerimientos Base
+
+- ✅ **Listado de Usuarios:** Consumo de la API JSONPlaceholder (`/users`).
+- ✅ **Diseño Responsive:** Visualización en Grid (tarjetas) adaptable a dispositivos móviles y escritorio.
+- ✅ **Detalle de Usuario:** Modal interactivo que muestra información extendida (Compañía, Dirección, Contacto).
+- ✅ **Manejo de Errores y Carga:** Feedback visual al usuario mediante estados de `loading` (spinners) y mensajes de error amigables.
+
+### Bonus / Puntos Extra
+
+- 🌟 **Filtrado por Nombre:** Implementación de un input de búsqueda que filtra los resultados en tiempo real.
+- 🌟 **Custom Hook (`useUsers`):** Abstracción de la lógica de fetching en un hook reutilizable utilizando TanStack Query.
+- 🌟 **Arquitectura Modular:** Separación clara de responsabilidades (UI vs Lógica).
+
+## 📂 Estructura del Proyecto
+
+El código sigue una arquitectura escalable y organizada:
+
+```text
+src/
+├── components/   # Componentes reutilizables (UserCard, UserModal)
+├── hooks/        # Lógica de negocio y Custom Hooks (useUsers)
+├── types/        # Definiciones e Interfaces TypeScript (User, Address...)
+├── App.tsx       # Componente principal e integración
+└── main.tsx      # Punto de entrada y configuración de Providers
 ```
